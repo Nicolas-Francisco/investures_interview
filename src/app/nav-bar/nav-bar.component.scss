@@ -1,0 +1,73 @@
+/* Modify the background color */
+.navbar-custom {
+  background-color: #0277BD;
+  height:  64px;
+}
+
+.menu-style{
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  left: 0;
+}
+
+.menu-icon-style{
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: 15px;
+  bottom: 15px;
+}
+
+.navbarname-style{
+  position: absolute;
+  width: 118px;
+  height: 32px;
+  left: 48px;
+  top: 16px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 28px;
+  /* identical to box height */
+
+  letter-spacing: 0.15px;
+}
+
+.search-style{
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  right: 48px;
+}
+
+.searchbar-style{
+  position: absolute;
+  right: 96px;
+}
+
+
+.search-icon-style{
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: 15px;
+  bottom: 15px;
+}
+
+.cart-style{
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  right: 0px;
+}
+
+.cart-icon-style{
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 14px;
+  bottom: 14px;
+}
