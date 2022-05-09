@@ -1,10 +1,14 @@
 export interface Purchase {
+  payload: MainPurchase[];
+};
+
+export interface MainPurchase {
   purchase_id: number;
   details: boughtProduct[];
   received_date: Date;
-};
+}
 
-interface boughtProduct {
+export interface boughtProduct {
   product_id: number;
   quantity: number;
 }

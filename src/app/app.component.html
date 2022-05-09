@@ -12,6 +12,8 @@
   <p class="align-middle pills-left my-0 px-0"> Te queda </p>
 </div>
 
-<div class="pill-cards">
-  <app-pill-card></app-pill-card>
+<div class="container-fluid pills-subsection">
+  <div class="pill-cards" *ngFor="let item of items">
+    <app-pill-card></app-pill-card>
+  </div>
 </div>

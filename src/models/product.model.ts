@@ -1,4 +1,8 @@
 export interface Product {
+  payload: MainProduct[];
+};
+
+export interface MainProduct{
   id: number;
   name: string;
   description: string | null;
@@ -20,7 +24,7 @@ export interface Product {
   format: string;
   activePrinciple: string;
   laboratory: string;
-};
+}
 
 // ejemplo de un producto:
 //

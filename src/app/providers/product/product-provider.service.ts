@@ -14,7 +14,6 @@ export class ProductProviderService {
 
 
   public get(): Observable<Product> {
-
     return this.HttpService.get<Product>('/products');
   }
 }

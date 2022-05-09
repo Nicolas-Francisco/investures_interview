@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ProductProviderService } from '@providers/product/product-provider.service';
 import { PurchaseProviderService } from '@providers/purchase/purchase-provider.service';
-import { Product } from '@models/product.model';
-import { Purchase } from '@models/purchase.model';
+import { Product, MainProduct } from '@models/product.model';
+import { MainPurchase, Purchase } from '@models/purchase.model';
 
 @Component({
   selector: 'app-root',
@@ -12,22 +12,32 @@ import { Purchase } from '@models/purchase.model';
 
 export class AppComponent {
   public isLoad:boolean= false;
-  public products: Product[];
+  public products: MainProduct[];
+  public purchases: MainPurchase[];
+  public items = [1, 2, 3];
 
   constructor(
     private productProviderService: ProductProviderService,
     private purchaseProviderService: PurchaseProviderService,
   ) {
     this.products = [];
+    this.purchases = [];
   }
 
-  ngOnInit(): void {
-    this.getData();
-  }
+  // ngOnInit(): void {
+  //   try {
+  //     this.productProviderService.get().subscribe(value => {
+  //       console.log(value);
+  //       this.products = value.payload;
+  //     });
 
-  private getData(): void {
-    // this.products = <Product[]> await this.productProviderService.get();
-    // this.purchases = <Purchase[]> await this.purchaseProviderService.get();
-    // this.isLoad = true;
-  }
+  //     this.showData();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // private showData(){
+  //   console.log(this.products);
+  // }
 }

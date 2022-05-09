@@ -14,7 +14,6 @@ export class PurchaseProviderService {
 
 
   public get(): Observable<Purchase> {
-
-    return this.HttpService.get<Purchase>('/purchase');
+    return this.HttpService.get<Purchase>('/purchases');
   }
 }

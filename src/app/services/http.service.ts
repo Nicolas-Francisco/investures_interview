@@ -15,7 +15,7 @@ export class HttpService {
   private baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = "https://polls.apiblueprint.org";
+    this.baseUrl = "https://private-anon-97ba28ab42-inventurestest.apiary-mock.com";
 
     this.httpOptions = {
       headers: new HttpHeaders({

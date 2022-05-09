@@ -1,1 +1,22 @@
-<p>pill-card works!</p>
+<div class="container-fluid pill-card">
+  <!-- imagen del remedio -->
+  <img class="product-img" src="{{product.imagesUrl}}" alt="{{product.name}}">
+
+  <!-- datos del remedio -->
+  <div class="container pill-data">
+    <div class="row px-0 py-0 mx-0 my-0 pill-name-container">
+      <p class="pill-name">{{product.name}}</p>
+    </div>
+    <div class="row px-0 py-0 mx-0 my-0 pill-name-container">
+      <p class="pill-dosis">{{product.concentration}}</p>
+    </div>
+    <div class="row px-0 py-0 mx-0 my-0 pill-name-container">
+      <p class="pill-left">{{left}}</p>
+    </div>
+  </div>
+
+  <!-- shop cart icon -->
+  <div class="cart-style">
+    <span class="material-icons md-20 md-dark cart-icon-style">shopping_cart</span>
+  </div>
+</div>
