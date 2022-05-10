@@ -9,9 +9,8 @@ import { MainProduct } from '@models/product.model';
 })
 export class PillCardComponent implements OnInit {
   @Input() remedio: MainRemedio;
-  public left = 0;
-  public text_pillsleft: string = `Quedan ${this.left} comprimidos`;
-  public text_daysleft: string = `Para ${this.left} días`;
+  public text_pillsleft: string;
+  public text_daysleft: string;
 
   constructor() {
     this.remedio = {
@@ -39,11 +38,22 @@ export class PillCardComponent implements OnInit {
         activePrinciple: "",
         laboratory: "",
       },
+      starting_date: new Date(),
       amount_left: 0,
     };
+
+    this.text_pillsleft = "";
+    this.text_daysleft = "`Para ${this.remedio.amount_left} días`";
   }
 
   ngOnInit(): void {
+    // se calcula la cantidad de comprimidos que quedan desde el inicio
+    // del tratamiento
+    let diffInMs = Math.abs(this.remedio.starting_date.getTime() - new Date().getTime());
+    let diffsInDays = diffInMs / (1000 * 60 * 60 * 24);
+    let pills_left = this.remedio.amount_left - Math.floor(diffsInDays);
+    this.text_pillsleft = `Quedan ${pills_left} comprimidos`;
+    this.text_daysleft = `Para ${pills_left} días`;
   }
 
 }

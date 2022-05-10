@@ -7,6 +7,7 @@ export interface Pastillero{
 export interface MainRemedio{
   id: number;
   product: MainProduct;
+  starting_date: Date;
   amount_left: number;
 }
 
