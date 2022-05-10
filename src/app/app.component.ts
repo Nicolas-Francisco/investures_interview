@@ -38,40 +38,40 @@ export class AppComponent {
     this.products = prod.payload;
     this.purchases = purc.payload;
 
+    // this.calculate_amount_of_pills();
     this.update_pastillero();
-    this.calculate_amount_of_pills();
   }
 
 
-  // Función que a partir de los productos en la lista de productos,
-  // se busca dentro de su detalle la cantidad de comprimidos que este contiene.
-  private calculate_amount_of_pills() {
-    // se recorre la lista de productos
-    this.products.forEach(product => {
-      // si el producto tiene variable display nula,
-      // entonces se asume que solo tiene una dósis
-      if (product.display === null) {
-        this.amount_of_pills_by_product[product.id] = 1;
-      } else {
-        // si no, dentro del detalle display del producto
-        // se busca la palabra clave "comprimidos" y se obtiene
-        // la cantidad más cercana dentro de la lista de palabras:
-        let display_words = product.display.split(" ");
-        for (let i = 0; i < display_words.length; i++) {
-          if (display_words[i] === "comprimidos" || display_words[i] === "comprimidos.") {
-            try{ // si la palabra anterior no es un int
-              this.amount_of_pills_by_product[product.id] = Number(display_words[i-1]);
-            } catch (error) { // entonces debe ser la siguiente
-              this.amount_of_pills_by_product[product.id] = Number(display_words[i+1]);
-            }
-            break;
-          }
-        }
-      }
-    })
+  // // Función que a partir de los productos en la lista de productos,
+  // // se busca dentro de su detalle la cantidad de comprimidos que este contiene.
+  // private calculate_amount_of_pills() {
+  //   // se recorre la lista de productos
+  //   this.products.forEach(product => {
+  //     // si el producto tiene variable display nula,
+  //     // entonces se asume que solo tiene una dósis
+  //     if (product.display === null) {
+  //       this.amount_of_pills_by_product[product.id] = 1;
+  //     } else {
+  //       // si no, dentro del detalle display del producto
+  //       // se busca la palabra clave "comprimidos" y se obtiene
+  //       // la cantidad más cercana dentro de la lista de palabras:
+  //       let display_words = product.display.split(" ");
+  //       for (let i = 0; i < display_words.length; i++) {
+  //         if (display_words[i] === "comprimidos" || display_words[i] === "comprimidos.") {
+  //           try{ // si la palabra anterior no es un int
+  //             this.amount_of_pills_by_product[product.id] = Number(display_words[i-1]);
+  //           } catch (error) { // entonces debe ser la siguiente
+  //             this.amount_of_pills_by_product[product.id] = Number(display_words[i+1]);
+  //           }
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   })
 
-    console.log("amount_of_pills_by_product", this.amount_of_pills_by_product);
-  }
+  //   console.log("amount_of_pills_by_product", this.amount_of_pills_by_product);
+  // }
 
 
   // función que a partir de los productos comprados en la lista de compras
@@ -89,9 +89,8 @@ export class AppComponent {
       // se recorre la lista de productos comprados
       purchase.details.forEach(detail => {
         // calculamos la cantidad de comprimidos que se compraron y se guarda
-        // la fecha de inicio del tratamiento
-        let amount_of_pills = (detail.quantity) * (this.amount_of_pills_by_product[detail.product_id]);
-        console.log("amount_of_pills", amount_of_pills);
+        // la fecha de compra del producto
+        let amount_of_pills = (detail.quantity);
         if (!pills_left.remedios.find(remedio => remedio.id === detail.product_id)) {
           pills_left.remedios.push({
             id: detail.product_id,
@@ -99,11 +98,28 @@ export class AppComponent {
             amount_left: amount_of_pills,
             starting_date: date
           });
-        } else { // si ya está en el pastillero, se suma
-          pills_left.remedios.find(remedio => remedio.id === detail.product_id)!.amount_left += amount_of_pills;
-          // Si la fecha de compra registrada es más reciente que la guardada,
-          // entonces debemos actualizarla
-          if (pills_left.remedios.find(remedio => remedio.id === detail.product_id)!.starting_date > date) {
+        } else { // si ya está en el pastillero
+          let remedio = pills_left.remedios.find(remedio => remedio.id === detail.product_id)!
+          if (remedio.starting_date < date) {
+            // Si la fecha de compra registrada es más reciente que la guardada,
+            // entonces debemos actualizarla junto con la cantidad de pastillas
+            // que quedan para esa fecha
+
+            // calculamos la cantidad de pastillas que deberían haberse tomado
+            let diffInMs = Math.abs(remedio.starting_date.getTime() - date.getTime());
+            let diffsInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+            // calculamos la cantidad de pastillas que quedan para esa fecha
+            let count_pills_left = remedio.amount_left - Math.floor(diffsInDays);
+
+            // evitamos que se queden pastillas negativas y evitamos contar pastillas que ya no se
+            // necesitan (que se acabaron antes de la fecha de compra)
+            if (count_pills_left < 0) {
+              count_pills_left = 0;
+            }
+
+            // actualizamos el pastillero
+            pills_left.remedios.find(remedio => remedio.id === detail.product_id)!.amount_left = (detail.quantity + count_pills_left);
             pills_left.remedios.find(remedio => remedio.id === detail.product_id)!.starting_date = date;
           }
         }

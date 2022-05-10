@@ -47,11 +47,23 @@ export class PillCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // se calcula la cantidad de comprimidos que quedan desde el inicio
-    // del tratamiento
+    // se calcula la cantidad de comprimidos que quedan por consumir
+
+    // testing para distintos días del último mes
+    // let diffInMs = Math.abs(this.remedio.starting_date.getTime() - new Date("2022-03-20T15:00:00Z").getTime());
+
+    // Para calcular la cantidad de pastillas que quedan a día de hoy
     let diffInMs = Math.abs(this.remedio.starting_date.getTime() - new Date().getTime());
     let diffsInDays = diffInMs / (1000 * 60 * 60 * 24);
     let pills_left = this.remedio.amount_left - Math.floor(diffsInDays);
+
+    // evitamos que se queden pastillas negativas y evitamos contar pastillas que ya no se
+    // necesitan (que se acabaron antes de la fecha de compra)
+    if (pills_left < 0) {
+      pills_left = 0;
+    }
+
+    // se calcula el texto que se va a mostrar en la tarjeta
     this.text_pillsleft = `Quedan ${pills_left} comprimidos`;
     this.text_daysleft = `Para ${pills_left} días`;
   }
