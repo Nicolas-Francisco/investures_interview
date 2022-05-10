@@ -4,6 +4,7 @@ import { PurchaseProviderService } from '@providers/purchase/purchase-provider.s
 import { Product, MainProduct } from '@models/product.model';
 import { MainPurchase, Purchase } from '@models/purchase.model';
 import { Pastillero, MainRemedio } from '@models/pastillero.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent {
   constructor(
     private productProviderService: ProductProviderService,
     private purchaseProviderService: PurchaseProviderService,
+    private titleService: Title
   ) {
     this.amount_of_pills_by_product = {};
     this.mi_pastillero = {remedios: []};
@@ -28,9 +30,9 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Mi Pastillero");
     this.getData();
   }
-
 
   private async getData() {
     let prod = <Product> await this.productProviderService.get().toPromise();
