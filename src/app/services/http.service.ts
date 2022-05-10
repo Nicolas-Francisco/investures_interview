@@ -14,13 +14,14 @@ export class HttpService {
   private httpOptions: HttpOptions;
   private baseUrl: string;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient
+  ) {
     this.baseUrl = "https://private-anon-97ba28ab42-inventurestest.apiary-mock.com";
 
     this.httpOptions = {
       headers: new HttpHeaders({
-        // 'Content-Type':  'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type':  'application/json'
       })
     };
   }
@@ -28,7 +29,7 @@ export class HttpService {
   public get<type>(path: string){
     return this.httpClient.get<type>(this.baseUrl + path, this.httpOptions)
       .pipe(map((data: any) => {
-        return data.message as type;
+        return data as type;
       }));
   }
 }

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PillCardComponent } from './pill-card/pill-card.component';
+import { HttpService } from '@services/http.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { PillCardComponent } from './pill-card/pill-card.component';
     AppRoutingModule,
     HttpClientModule,   // <-- import HttpClientModule
   ],
-  providers: [],
+  providers: [
+    HttpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

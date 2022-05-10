@@ -13,7 +13,7 @@
 </div>
 
 <div class="container-fluid pills-subsection">
-  <div class="pill-cards" *ngFor="let item of items">
-    <app-pill-card></app-pill-card>
+  <div class="pill-cards" *ngFor="let item of mi_pastillero.remedios">
+    <app-pill-card  [remedio]="item"></app-pill-card>
   </div>
 </div>

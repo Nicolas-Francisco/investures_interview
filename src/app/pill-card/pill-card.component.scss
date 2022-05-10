@@ -16,9 +16,8 @@
 .pill-data{
   position: absolute;
   width: 151px;
-  top: 16px;
+  bottom: 8px;
   left: 98px;
-  margin-left: 16px;
   padding: 0;
 }
 
@@ -51,6 +50,9 @@
 }
 
 .pill-left{
+  white-space: nowrap;
+  width: 160px;
+  height: 20px;
   margin: 0;
   padding: 0;
   font-family: 'Poppins';
@@ -61,8 +63,21 @@
   /* identical to box height */
 
   letter-spacing: 0.15px;
+}
 
-  color: rgba(0, 0, 0, 0.54);
+a{
+  color: #0277BD !important;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #F44336 !important;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #F44336 !important;
+  text-decoration: underline;
 }
 
 .pill-cart{
@@ -77,7 +92,24 @@
   top: calc(100% - 48px - 23px);
 }
 
+.addcart-style{
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  right: 4px;
+  bottom: 35px;
+  top: 11px;
+}
+
 .cart-icon-style{
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 14px;
+  bottom: 14px;
+}
+
+.addcart-icon-style{
   position: absolute;
   left: 14px;
   right: 14px;

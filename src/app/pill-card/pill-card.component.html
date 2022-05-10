@@ -1,22 +1,26 @@
 <div class="container-fluid pill-card">
   <!-- imagen del remedio -->
-  <img class="product-img" src="{{product.imagesUrl}}" alt="{{product.name}}">
+  <img class="product-img" src="{{remedio.product.imagesUrl}}" alt="{{remedio.product.name}}">
 
   <!-- datos del remedio -->
   <div class="container pill-data">
-    <div class="row px-0 py-0 mx-0 my-0 pill-name-container">
-      <p class="pill-name">{{product.name}}</p>
+    <div class="row px-0 py-0 mx-0 my-0">
+      <p class="pill-name">{{remedio.product.name}}</p>
     </div>
-    <div class="row px-0 py-0 mx-0 my-0 pill-name-container">
-      <p class="pill-dosis">{{product.concentration}}</p>
+    <div class="row px-0 py-0 mx-0 my-0">
+      <p class="pill-dosis">{{remedio.product.concentration}}</p>
     </div>
-    <div class="row px-0 py-0 mx-0 my-0 pill-name-container">
-      <p class="pill-left">{{left}}</p>
+    <div class="row px-0 py-0 mx-0 my-0">
+      <a class="pill-left">{{text_pillsleft}}</a>
+      <a class="pill-left">{{text_daysleft}}</a>
     </div>
   </div>
 
   <!-- shop cart icon -->
   <div class="cart-style">
     <span class="material-icons md-20 md-dark cart-icon-style">shopping_cart</span>
+  </div>
+  <div class="addcart-style">
+    <span class="material-icons md-20 md-blue addcart-icon-style">add_circle</span>
   </div>
 </div>
